@@ -1,0 +1,24 @@
+import time
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+#from selenium.webdriver import ActionChains
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.ui import Select
+
+driver = webdriver.Chrome(executable_path=r"---ENTER PATH TO YOUR CHROME DRIVER IN HERE---\chromedriver.exe")
+driver.get("https://passwordsgenerator.net/")
+time.sleep(3)
+action = ActionChains(driver)
+ddelement = Select(driver.find_element_by_id('pgLength'))
+ddelement.select_by_value('8')
+driver.find_element_by_id("NoAmb").click()
+driver.find_element_by_xpath("/html/body/div/div[3]/div[1]").click()
+driver.find_element_by_id("final_pass").click()
+action.send_keys(Keys.CONTROL, 'c') #copy
+driver.get("https://privnote.com/")
+driver.find_element_by_id("cookie_consent").click()
+driver.find_element_by_id("note_raw").click()
+action.send_keys(Keys.CONTROL, 'v') #paste
+driver.find_element_by_id("encrypt_note").click()
+time.sleep(3)
+driver.find_element_by_id("note_link_input").click
